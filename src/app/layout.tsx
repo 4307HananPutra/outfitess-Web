@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@/styles/globals.css";
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -11,31 +12,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: {
+  children: React.ReactNode
+}) {
   return (
     <html lang="en">
-      <head>
-      <script 
-      async 
-      src="https://www.googletagmanager.com/gtag/js?id=G-X0C953T29V"
-      ></script>
-      <script id="google-analytics">
-        {
-          `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-
-            gtag('config', 'G-X0C953T29V');
-          `
-        }
-      </script>  
-
-
-      </head>
-      <body className={inter.className}>{children}</body>
+      <body>{children}</body>
+      <GoogleAnalytics gaId="G-X0C953T29V" />
     </html>
-  );
+  )
 }
